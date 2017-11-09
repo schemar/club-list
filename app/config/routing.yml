@@ -2,5 +2,24 @@ app:
     resource: '@AppBundle/Controller/'
     type: annotation
 
+user:
+    resource: '@UserBundle/Controller/'
+    type: annotation
+
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+# Override unneeded FOSUser routes
+fos_user_profile_show:
+    path: /profile/
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: fos_user_profile_edit
+        permanent: true
+
+fos_user_registration_register:
+    path: /register/
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: admin_register
+        permanent: true
