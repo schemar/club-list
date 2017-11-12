@@ -42,6 +42,14 @@ class User extends BaseUser
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->email ?: 'New user';
+    }
+
+    /**
      * @param string $email
      * @return $this
      */

@@ -40,7 +40,7 @@
                     </ul>
                     {% if is_granted('ROLE_ADMIN') %}
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="{{ path('fos_user_registration_register') }}">Register</a></li>
+                            <li><a href="{{ path('sonata_admin_dashboard') }}">Admin</a></li>
                         </ul>
                     {% endif %}
                 {% else %}
