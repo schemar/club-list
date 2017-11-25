@@ -15,13 +15,15 @@ security:
             pattern: ^/
             form_login:
                 provider: fos_userbundle
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
                 csrf_token_generator: security.csrf.token_manager
             logout:       true
             anonymous:    true
 
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: ROLE_ADMIN }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin, role: ROLE_ADMIN }
-        - { path: ^/members, role: IS_AUTHENTICATED_REMEMBERED }
+        - { path: '^/[a-z]{2}/login$', role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: '^/[a-z]{2}/register', role: ROLE_ADMIN }
+        - { path: '^/[a-z]{2}/resetting', role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: '^/[a-z]{2}/members', role: IS_AUTHENTICATED_REMEMBERED }
+        - { path: '^/admin', role: ROLE_ADMIN }

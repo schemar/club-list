@@ -7,10 +7,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use UserBundle\Entity\User;
 
+/**
+ * @Route("/members")
+ */
 class MembersController extends Controller
 {
     /**
-     * @Route("/members", name="members_list")
+     * @Route("", name="members_list")
      * @Template()
      * @return array
      */
@@ -26,7 +29,7 @@ class MembersController extends Controller
     }
 
     /**
-     * @Route("/members/{email}", name="member_details")
+     * @Route("/{email}", name="member_details")
      * @Template()
      * @param string $email
      * @return array
