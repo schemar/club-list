@@ -1,0 +1,7 @@
+{% for member_status in user.memberStatuses %}
+    {% if user.isFemale %}
+        {{ member_status.translate.femaleName }}{{ loop.last ? '' : ',' }}
+    {% else %}
+        {{ member_status.translate.maleName }}{{ loop.last ? '' : ',' }}
+    {% endif %}
+{% endfor %}

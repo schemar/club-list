@@ -4,20 +4,27 @@
     <div class="row">
         <div class="col-xs-12">
             <h1>Members</h1>
+            {{ form_start(member_statuses_form) }}
+            {{ form_widget(member_statuses_form) }}
+            {{ form_end(member_statuses_form) }}
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th>{{ 'app.members.email'|trans }}</th>
                     <th>{{ 'app.members.firstname'|trans }}</th>
                     <th>{{ 'app.members.lastname'|trans }}</th>
+                    <th>{{ 'app.members.email'|trans }}</th>
+                    <th>{{ 'app.members.status'|trans }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for user in users %}
                     <tr>
+                        <td><a href="{{ path('member_details', {'email': user.email}) }}">{{ user.firstName }}</a></td>
+                        <td><a href="{{ path('member_details', {'email': user.email}) }}">{{ user.lastName }}</a></td>
                         <td><a href="{{ path('member_details', {'email': user.email}) }}">{{ user.email }}</a></td>
-                        <td>{{ user.firstName }}</td>
-                        <td>{{ user.lastName }}</td>
+                        <td>
+                            {% include '@App/Members/member_status.html.twig' with {'user': user} %}
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>

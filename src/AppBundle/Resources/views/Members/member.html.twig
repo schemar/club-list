@@ -6,6 +6,7 @@
             <h1>
                 {{ user.firstName }}&nbsp;{{ user.lastName }}<br />
                 <small>
+                    {% include '@App/Members/member_status.html.twig' with {'user': user} %}
                     {% if 'ROLE_SUPER_ADMIN' in user.roles or 'ROLE_ADMIN' in user.roles %}
                         <span class="label label-info">Admin</span>
                     {% endif %}

@@ -9,12 +9,17 @@ services:
         tags:
             - { name: form.type, alias: app_user_profile }
 
-    app.entity.member_status.repository:
+    app.repository.member_status:
         class: Doctrine\ORM\EntityRepository
         factory: ['@doctrine.orm.default_entity_manager', getRepository]
         arguments:
             - AppBundle\Entity\MemberStatus
 
+    user.repository.user:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - UserBundle\Entity\User
 
     admin.user:
         class: AppBundle\Admin\UserAdmin

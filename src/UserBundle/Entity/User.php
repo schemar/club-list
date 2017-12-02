@@ -8,11 +8,14 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
  * @ORM\Table(name="`user`")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  */
 class User extends BaseUser
 {
+    const SEX_MALE = 'male';
+    const SEX_FEMALE = 'female';
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -37,6 +40,12 @@ class User extends BaseUser
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
+
+    /**
+     * @var string
+     * @ORM\Column(name="gender", type="string", length=255, nullable=true)
+     */
+    private $gender;
 
     /**
      * @var MemberStatus[]
@@ -117,6 +126,30 @@ class User extends BaseUser
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param string $gender
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFemale()
+    {
+        return $this->gender === self::SEX_FEMALE;
     }
 
     /**

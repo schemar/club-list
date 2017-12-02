@@ -5,9 +5,11 @@ namespace UserBundle\Form;
 use AppBundle\Entity\MemberStatus;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use UserBundle\Entity\User;
 
 /**
  * ProfileFormType for users to update their profile
@@ -19,6 +21,18 @@ class ProfileFormType extends AbstractType
         $builder->add('firstName', TextType::class);
         $builder->add('lastName', TextType::class);
         $builder->add('address', TextareaType::class);
+        $builder->add(
+            'gender',
+            ChoiceType::class,
+            [
+                'choices' => [
+                    'app.members.sex.undefined' => null,
+                    'app.members.sex.male' => User::SEX_MALE,
+                    'app.members.sex.female' => User::SEX_FEMALE,
+                ],
+                'choices_as_values' => true,
+            ]
+        );
         $builder->add(
             'memberStatuses',
             EntityType::class,
