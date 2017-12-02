@@ -42,7 +42,7 @@ class MemberStatus
             return 'New MemberStatus';
         }
 
-        return sprintf('Member Status (%s)', $this->getEnglishName());
+        return $this->translate()->getMixedName();
     }
 
     /**

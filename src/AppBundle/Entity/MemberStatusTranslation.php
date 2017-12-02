@@ -34,6 +34,20 @@ class MemberStatusTranslation
     protected $femaleDescription;
 
     /**
+     * Returns the male name and the female name if it exists.
+     *
+     * @return string
+     */
+    public function getMixedName()
+    {
+        if ($this->femaleName) {
+            return sprintf('%s/%s', $this->maleName, $this->femaleName);
+        }
+
+        return (string) $this->maleName;
+    }
+
+    /**
      * @return string
      */
     public function getMaleName()
