@@ -1,21 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-<div class="row">
-    <div class="col-xs-12">
-        <h1>{{ user.firstName }}&nbsp;{{ user.lastName }}</h1>
-        <dl>
-            <dt>{{ 'app.members.email'|trans }}</dt>
-            <dd>{{ user.email }}</dd>
-            <dt>{{ 'app.members.firstname'|trans }}</dt>
-            <dd>{{ user.firstName }}</dd>
-            <dt>{{ 'app.members.lastname'|trans }}</dt>
-            <dd>{{ user.lastName }}</dd>
-            <dt>{{ 'app.members.address'|trans }}</dt>
-            <dd>{{ user.address|nl2br }}</dd>
-        </dl>
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>
+                {{ user.firstName }}&nbsp;{{ user.lastName }}<br />
+                <small>
+                    {% if 'ROLE_SUPER_ADMIN' in user.roles or 'ROLE_ADMIN' in user.roles %}
+                        <span class="label label-info">Admin</span>
+                    {% endif %}
+                </small>
+            </h1>
+            <dl>
+                <dt>{{ 'app.members.email'|trans }}</dt>
+                <dd>{{ user.email }}</dd>
+                <dt>{{ 'app.members.firstname'|trans }}</dt>
+                <dd>{{ user.firstName }}</dd>
+                <dt>{{ 'app.members.lastname'|trans }}</dt>
+                <dd>{{ user.lastName }}</dd>
+                <dt>{{ 'app.members.address'|trans }}</dt>
+                <dd>{{ user.address|nl2br }}</dd>
+            </dl>
+        </div>
     </div>
-</div>
 
 {% endblock %}
 

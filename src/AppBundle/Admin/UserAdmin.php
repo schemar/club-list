@@ -55,7 +55,7 @@ class UserAdmin extends AbstractAdmin
                 ->add('email', TextType::class)
                 ->add('firstName', TextType::class, ['required' => false])
                 ->add('lastName', TextType::class, ['required' => false])
-                ->add('Address', TextareaType::class, ['required' => false])
+                ->add('address', TextareaType::class, ['required' => false])
             ->end()
             ->with(
                 'Password',
