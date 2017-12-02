@@ -24,7 +24,7 @@ class MembersController extends Controller
         $users = $userManager->findUsers();
 
         return [
-            'users' => $users
+            'users' => $users,
         ];
     }
 

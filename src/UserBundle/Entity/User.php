@@ -2,6 +2,8 @@
 
 namespace UserBundle\Entity;
 
+use AppBundle\Entity\MemberStatus;
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -36,9 +38,17 @@ class User extends BaseUser
      */
     private $address;
 
+    /**
+     * @var MemberStatus[]
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\MemberStatus")
+     */
+    private $memberStatuses;
+
     public function __construct()
     {
         parent::__construct();
+
+        $this->memberStatuses = new ArrayCollection();
     }
 
     /**
@@ -107,5 +117,37 @@ class User extends BaseUser
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
+    }
+
+    /**
+     * @return MemberStatus[]
+     */
+    public function getMemberStatuses()
+    {
+        return $this->memberStatuses;
+    }
+
+    /**
+     * @param ArrayCollection $memberStatuses
+     */
+    public function setMemberStatuses(ArrayCollection $memberStatuses)
+    {
+        $this->memberStatuses = $memberStatuses;
+    }
+
+    /**
+     * @param MemberStatus $memberStatus
+     */
+    public function addMemberStatus(MemberStatus $memberStatus)
+    {
+        $this->memberStatuses->add($memberStatus);
+    }
+
+    /**
+     * @param MemberStatus $memberStatus
+     */
+    public function removeMemberStatus(MemberStatus $memberStatus)
+    {
+        $this->memberStatuses->removeElement($memberStatus);
     }
 }

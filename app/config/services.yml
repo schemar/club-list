@@ -9,6 +9,13 @@ services:
         tags:
             - { name: form.type, alias: app_user_profile }
 
+    app.entity.member_status.repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - AppBundle\Entity\MemberStatus
+
+
     admin.user:
         class: AppBundle\Admin\UserAdmin
         arguments: [~, UserBundle\Entity\User, ~]
@@ -18,4 +25,11 @@ services:
                   - '@fos_user.user_manager'
         tags:
             - { name: sonata.admin, manager_type: orm, group: 'Club List', label: User }
+        public: true
+
+    admin.member_status:
+        class: AppBundle\Admin\MemberStatusAdmin
+        arguments: [~, AppBundle\Entity\MemberStatus, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'Club List', label: 'Member Status' }
         public: true
