@@ -1,13 +1,26 @@
 app:
   default:
     welcome: 'Welcome!'
+    login: 'Login'
+    logout: 'Logout'
+    admin: 'Admin'
+  profile:
+    profile: 'Profile'
+    firstname: 'First name'
+    lastname: 'Last name'
+    address: 'Address'
+    gender: 'Gender'
+    memberStatuses: 'Which statuses do you have?'
   members:
+    members: 'Members'
     email: 'Email'
     firstname: 'First name'
     lastname: 'Last name'
     address: 'Address'
     status: 'Status'
+    memberStatusesFilter: 'Filter by member status:'
     filter: 'Filter'
+    admin: 'Admin'
     sex:
       female: 'Female'
       male: 'Male'

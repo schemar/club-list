@@ -1,0 +1,27 @@
+app:
+  default:
+    welcome: 'Willkommen!'
+    login: 'Einloggen'
+    logout: 'Ausloggen'
+    admin: 'Admin'
+  profile:
+    profile: 'Profil'
+    firstname: 'Vorname'
+    lastname: 'Nachname'
+    address: 'Adresse'
+    gender: 'Geschlecht'
+    memberStatuses: 'Welche Status hältst du?'
+  members:
+    members: 'Mitglieder'
+    email: 'E-Mail'
+    firstname: 'Vorname'
+    lastname: 'Nachname'
+    address: 'Adresse'
+    status: 'Status'
+    memberStatusesFilter: 'Nach Mitgliedsstatus filtern:'
+    filter: 'Filtern'
+    admin: 'Administrator'
+    sex:
+      female: 'Frau'
+      male: 'Mann'
+      undefined: 'Unbestimmt'

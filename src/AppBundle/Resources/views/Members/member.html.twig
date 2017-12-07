@@ -8,7 +8,7 @@
                 <small>
                     {% include '@App/Members/member_status.html.twig' with {'user': user} %}
                     {% if 'ROLE_SUPER_ADMIN' in user.roles or 'ROLE_ADMIN' in user.roles %}
-                        <span class="label label-info">Admin</span>
+                        <span class="label label-info">{{ 'app.members.admin'|trans }}</span>
                     {% endif %}
                 </small>
             </h1>

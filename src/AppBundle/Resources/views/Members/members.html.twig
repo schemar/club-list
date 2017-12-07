@@ -3,10 +3,14 @@
 {% block content %}
     <div class="row">
         <div class="col-xs-12">
-            <h1>Members</h1>
-            {{ form_start(member_statuses_form) }}
-            {{ form_widget(member_statuses_form) }}
-            {{ form_end(member_statuses_form) }}
+            <h1>{{ 'app.members.members'|trans }}</h1>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    {{ form_start(member_statuses_form) }}
+                    {{ form_widget(member_statuses_form) }}
+                    {{ form_end(member_statuses_form) }}
+                </div>
+            </div>
             <table class="table table-bordered">
                 <thead>
                 <tr>

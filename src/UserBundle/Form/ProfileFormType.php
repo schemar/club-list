@@ -18,13 +18,14 @@ class ProfileFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('firstName', TextType::class);
-        $builder->add('lastName', TextType::class);
-        $builder->add('address', TextareaType::class);
+        $builder->add('firstName', TextType::class, ['label' => 'app.profile.firstname']);
+        $builder->add('lastName', TextType::class, ['label' => 'app.profile.lastname']);
+        $builder->add('address', TextareaType::class, ['label' => 'app.profile.address']);
         $builder->add(
             'gender',
             ChoiceType::class,
             [
+                'label' => 'app.profile.gender',
                 'choices' => [
                     'app.members.sex.undefined' => null,
                     'app.members.sex.male' => User::SEX_MALE,
@@ -38,6 +39,7 @@ class ProfileFormType extends AbstractType
             EntityType::class,
             [
                 'class' => MemberStatus::class,
+                'label' => 'app.profile.memberStatuses',
                 'multiple' => true,
                 'expanded' => true,
                 'choice_label' => 'translate.mixedName',

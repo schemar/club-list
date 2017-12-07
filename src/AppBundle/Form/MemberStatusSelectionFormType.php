@@ -22,6 +22,7 @@ class MemberStatusSelectionFormType extends AbstractType
             EntityType::class,
             [
                 'class' => MemberStatus::class,
+                'label' => 'app.members.memberStatusesFilter',
                 'query_builder' => function (EntityRepository $entityRepository) {
                     return $entityRepository->createQueryBuilder('status')
                         ->orderBy('status.priority', 'DESC');
