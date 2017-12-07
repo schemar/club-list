@@ -7,6 +7,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * MemberStatusSelectionFormType to select certain member statuses
@@ -26,6 +27,13 @@ class MemberStatusSelectionFormType extends AbstractType
             ]
         )
             ->add('save', SubmitType::class, ['label' => 'app.members.filter']);
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'csrf_protection' => false,
+        ]);
     }
 
     public function getName()

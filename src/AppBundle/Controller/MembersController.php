@@ -27,7 +27,13 @@ class MembersController extends Controller
         /** @var UserRepository $userRepository */
         $userRepository = $this->get('user.repository.user');
 
-        $form = $this->createForm(MemberStatusSelectionFormType::class);
+        $form = $this->createForm(
+            MemberStatusSelectionFormType::class,
+            null,
+            [
+                'method' => 'GET',
+            ]
+        );
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
