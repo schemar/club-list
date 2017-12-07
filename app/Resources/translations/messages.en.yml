@@ -1,8 +1,8 @@
 app:
   default:
     welcome: 'Welcome!'
-    login: 'Login'
-    logout: 'Logout'
+    login: 'Log in'
+    logout: 'Log out'
     admin: 'Admin'
   profile:
     profile: 'Profile'

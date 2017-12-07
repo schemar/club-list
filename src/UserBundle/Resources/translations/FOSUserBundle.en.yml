@@ -1,0 +1,15 @@
+security:
+    login:
+        username: Email
+        forgot_password: 'Forgot password'
+
+profile:
+    show:
+        username: Email
+
+resetting:
+    request:
+        username: 'Email address'
+
+form:
+    username: Email

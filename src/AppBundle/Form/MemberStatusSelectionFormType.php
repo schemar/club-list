@@ -41,9 +41,4 @@ class MemberStatusSelectionFormType extends AbstractType
             'csrf_protection' => false,
         ]);
     }
-
-    public function getName()
-    {
-        return 'app_member_status_selection';
-    }
 }
