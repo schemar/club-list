@@ -8,7 +8,6 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use UserBundle\Entity\User;
@@ -32,10 +31,19 @@ class UserAdmin extends AbstractAdmin
     public function preUpdate($user)
     {
         $this->getUserManager()->updateCanonicalFields($user);
+    }
 
-        if ($user->getPlainPassword()) {
-            $this->getUserManager()->updatePassword($user);
-        }
+    /**
+     * Create a random password for a new user
+     *
+     * User must use "password reset".
+     *
+     * @param User $user
+     */
+    public function prePersist($user)
+    {
+        $randomPassword = openssl_random_pseudo_bytes(30);
+        $user->setPlainPassword($randomPassword);
     }
 
     public function setUserManager(UserManagerInterface $userManager)
@@ -57,15 +65,6 @@ class UserAdmin extends AbstractAdmin
                 ->add('lastName', TextType::class, ['required' => false])
                 ->add('address', TextareaType::class, ['required' => false])
                 ->add('memberStatuses')
-            ->end()
-            ->with(
-                'Password',
-                [
-                    'box_class'   => 'box box-solid box-danger',
-                    'description' => 'Leave empty if you do not want to change the password',
-                ]
-            )
-                ->add('plainPassword', PasswordType::class, ['required' => false])
             ->end();
     }
 
