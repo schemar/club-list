@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
@@ -33,6 +34,15 @@ class MemberStatusAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->with('General', ['class' => 'col-md-4'])
+                ->add(
+                    'priority',
+                    IntegerType::class,
+                    [
+                        'help' => 'Statuses with a higher priority are listed before statuses with a lower priority.',
+                    ]
+                )
+            ->end()
             ->with('English', ['class' => 'col-md-4'])
                 ->add('englishName', TextType::class)
                 ->add('englishDescription', TextType::class)
@@ -52,6 +62,7 @@ class MemberStatusAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper->addIdentifier('id')
+            ->add('priority')
             ->addIdentifier('englishName')
             ->addIdentifier('germanMaleName');
     }

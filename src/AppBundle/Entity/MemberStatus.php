@@ -22,6 +22,20 @@ class MemberStatus
      */
     private $id;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="priority", type="integer")
+     */
+    private $priority;
+
+    /**
+     * MemberStatus constructor initializes values.
+     */
+    public function __construct()
+    {
+        $this->priority = 0;
+    }
 
     /**
      * Get id
@@ -31,6 +45,22 @@ class MemberStatus
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
+    /**
+     * @param int $priority
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
     }
 
     /**

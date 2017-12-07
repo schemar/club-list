@@ -50,6 +50,7 @@ class User extends BaseUser
     /**
      * @var MemberStatus[]
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\MemberStatus")
+     * @ORM\OrderBy({"priority" = "DESC"})
      */
     private $memberStatuses;
 
