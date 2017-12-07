@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
 
             // Sonata Admin
             new Sonata\CoreBundle\SonataCoreBundle(),

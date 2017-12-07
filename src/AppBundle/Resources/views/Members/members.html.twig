@@ -10,14 +10,29 @@
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th>{{ 'app.members.firstname'|trans }}</th>
-                    <th>{{ 'app.members.lastname'|trans }}</th>
-                    <th>{{ 'app.members.email'|trans }}</th>
+                    <th>
+                        {{ knp_pagination_sortable(pagination, 'app.members.firstname'|trans, 'user.firstName') }}
+                        {% if pagination.isSorted('user.firstName') %}
+                            {% if pagination.direction == 'asc' %}⬆{% else %}⬇{% endif %}
+                        ️️{% endif %}
+                    </th>
+                    <th>
+                        {{ knp_pagination_sortable(pagination, 'app.members.lastname'|trans, 'user.lastName') }}
+                        {% if pagination.isSorted('user.lastName') %}
+                            {% if pagination.direction == 'asc' %}⬆{% else %}⬇{% endif %}
+                        ️️{% endif %}
+                    </th>
+                    <th>
+                        {{ knp_pagination_sortable(pagination, 'app.members.email'|trans, 'user.email') }}
+                        {% if pagination.isSorted('user.email') %}
+                            {% if pagination.direction == 'asc' %}⬆{% else %}⬇{% endif %}
+                        ️️{% endif %}
+                    </th>
                     <th>{{ 'app.members.status'|trans }}</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for user in users %}
+                {% for user in pagination %}
                     <tr>
                         <td><a href="{{ path('member_details', {'email': user.email}) }}">{{ user.firstName }}</a></td>
                         <td><a href="{{ path('member_details', {'email': user.email}) }}">{{ user.lastName }}</a></td>
@@ -29,6 +44,7 @@
                 {% endfor %}
                 </tbody>
             </table>
+            {{ knp_pagination_render(pagination) }}
         </div>
     </div>
 {% endblock %}

@@ -4,12 +4,14 @@ namespace AppBundle\Controller;
 
 use AppBundle\Form\MemberStatusSelectionFormType;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\QueryBuilder;
+use Knp\Component\Pager\Pagination\PaginationInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Entity\User;
-use UserBundle\Repository\UserRepository;
 
 /**
  * @Route("/members")
@@ -24,36 +26,12 @@ class MembersController extends Controller
      */
     public function membersAction(Request $request)
     {
-        /** @var UserRepository $userRepository */
-        $userRepository = $this->get('user.repository.user');
-
-        $form = $this->createForm(
-            MemberStatusSelectionFormType::class,
-            null,
-            [
-                'method' => 'GET',
-            ]
-        );
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted()) {
-            $data = $form->getData();
-            /** @var ArrayCollection $memberStatuses */
-            $memberStatuses = $data['memberStatuses'];
-
-            if ($memberStatuses->count()) {
-                $users = $userRepository->findByMemberStatuses($memberStatuses->toArray());
-            } else {
-                /** @var User[] $users */
-                $users = $userRepository->findAll();
-            }
-        } else {
-            /** @var User[] $users */
-            $users = $userRepository->findAll();
-        }
+        $form = $this->getForm($request);
+        $query = $this->getQuery($form);
+        $pagination = $this->getPagination($request, $query);
 
         return [
-            'users' => $users,
+            'pagination' => $pagination,
             'member_statuses_form' => $form->createView(),
         ];
     }
@@ -73,5 +51,66 @@ class MembersController extends Controller
         return [
             'user' => $user
         ];
+    }
+
+    /**
+     * @param Request $request
+     * @return Form
+     */
+    private function getForm(Request $request)
+    {
+        $form = $this->createForm(
+            MemberStatusSelectionFormType::class,
+            null,
+            [
+                'method' => 'GET',
+            ]
+        );
+        $form->handleRequest($request);
+
+        return $form;
+    }
+
+    /**
+     * @param Form $form
+     * @return QueryBuilder
+     */
+    private function getQuery(Form $form)
+    {
+        $query = $this->get('doctrine.orm.entity_manager')
+            ->createQueryBuilder()
+            ->select('user')
+            ->from(User::class, 'user');
+
+        if ($form->isSubmitted()) {
+            $data = $form->getData();
+            /** @var ArrayCollection $memberStatuses */
+            $memberStatuses = $data['memberStatuses'];
+
+            if ($memberStatuses->count()) {
+                $query->innerJoin('user.memberStatuses', 'memberStatuses')
+                    ->where('memberStatuses IN (:memberStatuses)')
+                    ->setParameter('memberStatuses', $memberStatuses->toArray());
+            }
+        }
+
+        return $query;
+    }
+
+    /**
+     * @param Request $request
+     * @param QueryBuilder $query
+     * @return PaginationInterface
+     */
+    private function getPagination(Request $request, QueryBuilder $query)
+    {
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            15
+        );
+
+        return $pagination;
     }
 }

@@ -25,6 +25,7 @@
         "friendsofsymfony/user-bundle": "~2.0",
         "incenteev/composer-parameter-handler": "~2.0",
         "knplabs/doctrine-behaviors": "~1.1",
+        "knplabs/knp-paginator-bundle": "^2.7",
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "sonata-project/admin-bundle": "^3.24",
