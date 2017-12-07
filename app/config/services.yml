@@ -21,6 +21,13 @@ services:
         arguments:
             - UserBundle\Entity\User
 
+
+    app.locale_listener:
+        class: AppBundle\EventListener\LocaleListener
+        arguments: ['%kernel.default_locale%']
+        tags:
+            - { name: kernel.event_subscriber }
+
     admin.user:
         class: AppBundle\Admin\UserAdmin
         arguments: [~, UserBundle\Entity\User, ~]
