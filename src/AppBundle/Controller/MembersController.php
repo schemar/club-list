@@ -34,7 +34,13 @@ class MembersController extends Controller
             $data = $form->getData();
             /** @var ArrayCollection $memberStatuses */
             $memberStatuses = $data['memberStatuses'];
-            $users = $userRepository->findByMemberStatuses($memberStatuses->toArray());
+
+            if ($memberStatuses->count()) {
+                $users = $userRepository->findByMemberStatuses($memberStatuses->toArray());
+            } else {
+                /** @var User[] $users */
+                $users = $userRepository->findAll();
+            }
         } else {
             /** @var User[] $users */
             $users = $userRepository->findAll();
