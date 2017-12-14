@@ -4,10 +4,11 @@ parameters:
     #parameter_name: value
 
 services:
-    app.form.profile:
-        class: UserBundle\Form\ProfileFormType
-        tags:
-            - { name: form.type, alias: app_user_profile }
+    app.mailer:
+        class: AppBundle\Mailer\Mailer
+        arguments:
+            - '@mailer'
+            - '%mailer_from%'
 
     app.repository.member_status:
         class: Doctrine\ORM\EntityRepository
@@ -15,18 +16,38 @@ services:
         arguments:
             - AppBundle\Entity\MemberStatus
 
-    user.repository.user:
-        class: Doctrine\ORM\EntityRepository
-        factory: ['@doctrine.orm.default_entity_manager', getRepository]
-        arguments:
-            - UserBundle\Entity\User
+    app.form.profile:
+        class: UserBundle\Form\ProfileFormType
+        tags:
+            - { name: form.type, alias: app_user_profile }
 
+    app.form.registration:
+        class: UserBundle\Form\RegistrationFormType
+        tags:
+            - { name: "form.type", alias: "app_user_registration" }
+
+    app.form.invitation:
+        class: AppBundle\Form\InvitationFormType
+        arguments: ['@app.form.data_transformer.invitation']
+        tags:
+            - { name: "form.type", alias: "app_invitation_type" }
+
+    app.form.data_transformer.invitation:
+        class: AppBundle\Form\DataTransformer\InvitationToCodeTransformer
+        arguments: ['@doctrine.orm.entity_manager']
+        public: false
 
     app.locale_listener:
         class: AppBundle\EventListener\LocaleListener
         arguments: ['%kernel.default_locale%']
         tags:
             - { name: kernel.event_subscriber }
+
+    user.repository.user:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - UserBundle\Entity\User
 
     admin.user:
         class: AppBundle\Admin\UserAdmin
@@ -37,6 +58,23 @@ services:
                   - '@fos_user.user_manager'
         tags:
             - { name: sonata.admin, manager_type: orm, group: 'Club List', label: User }
+        public: true
+
+    admin.invitation:
+        class: AppBundle\Admin\InvitationAdmin
+        arguments: [~, AppBundle\Entity\Invitation, ~]
+        calls:
+            - method: setMailer
+              arguments:
+                  - '@app.mailer'
+            - method: setTokenStorage
+              arguments:
+                  - '@security.token_storage'
+            - method: setRouter
+              arguments:
+                  - '@router'
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'Club List', label: 'Invitation' }
         public: true
 
     admin.member_status:

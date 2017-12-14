@@ -25,7 +25,7 @@ class MemberStatus
     /**
      * @var int
      *
-     * @ORM\Column(name="priority", type="integer")
+     * @ORM\Column(name="priority", type="integer", options={"default": 0})
      */
     private $priority;
 

@@ -1,0 +1,3 @@
+app:
+  registration:
+    invalidInvitation: 'Der Einladungscode ist nicht gültig.'

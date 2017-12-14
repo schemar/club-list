@@ -10,6 +10,14 @@ profile:
 resetting:
     request:
         username: 'Email address'
+    email:
+        subject: 'Reset Password'
+        message: |
+            Hello %username%!
+
+            To reset your password - please visit %confirmationUrl%
+
+            Best regards!
 
 form:
     username: Email
