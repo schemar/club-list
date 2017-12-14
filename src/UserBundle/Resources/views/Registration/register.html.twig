@@ -1,0 +1,22 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+{% include "@FOSUser/Registration/register_content.html.twig" %}
+{% endblock fos_user_content %}
+
+{% block javascripts %}
+    <script>
+        // Magic from stack overflow to get the query parameters
+        params={};location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(s,k,v){params[k]=v});
+
+        if (typeof params.email !== 'undefined') {
+          emailInput = document.getElementById('fos_user_registration_form_email');
+          emailInput.value = params.email;
+        }
+
+        if (typeof params.code !== 'undefined') {
+          invitationInput = document.getElementById('fos_user_registration_form_invitation');
+          invitationInput.value = params.code;
+        }
+    </script>
+{% endblock javascripts %}

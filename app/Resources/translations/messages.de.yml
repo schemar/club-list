@@ -14,7 +14,7 @@ app:
 
         %inviter% hat Sie eingeladen!
 
-        Registrieren Sie sich unter %registrationUrl% und benutzen Sie den Einladungscode %code%
+        Registrieren Sie sich unter %registrationUrl%?email=%invitee%&code=%code% und benutzen Sie den Einladungscode %code%
 
         Beste Grüße!
 

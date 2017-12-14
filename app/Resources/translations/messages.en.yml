@@ -14,7 +14,7 @@ app:
 
         %inviter% invited you to join!
 
-        Register at %registrationUrl% and use the invitation code %code%
+        Register at %registrationUrl%?email=%invitee%&code=%code% and use the invitation code %code%
 
         Best regards!
 
