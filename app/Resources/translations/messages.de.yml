@@ -3,7 +3,21 @@ app:
     welcome: 'Willkommen!'
     login: 'Einloggen'
     logout: 'Ausloggen'
+    register: 'Registrieren'
     admin: 'Admin'
+  registration:
+    invitation: 'Einladungscode'
+    invitationEmail:
+      subject: Willkommen %invitee%
+      body: |
+        Hallo %invitee%!
+
+        %inviter% hat Sie eingeladen!
+
+        Registrieren Sie sich unter %registrationUrl%?email=%invitee%&code=%code% und benutzen Sie den Einladungscode %code%
+
+        Beste Grüße!
+
   profile:
     profile: 'Profil'
     firstname: 'Vorname'

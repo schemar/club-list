@@ -11,5 +11,14 @@ resetting:
     request:
         username: 'E-Mail-Adresse'
 
+    email:
+        subject: 'Passwort zurücksetzen'
+        message: |
+            Hallo %username%!
+
+            Besuchen Sie bitte folgende Seite, um Ihr Passwort zurückzusetzen: %confirmationUrl%
+
+            Beste Grüße!
+
 form:
     username: 'E-Mail'

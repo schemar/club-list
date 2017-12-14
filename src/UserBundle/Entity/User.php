@@ -2,10 +2,12 @@
 
 namespace UserBundle\Entity;
 
+use AppBundle\Entity\Invitation;
 use AppBundle\Entity\MemberStatus;
 use Doctrine\Common\Collections\ArrayCollection;
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="`user`")
@@ -53,6 +55,13 @@ class User extends BaseUser
      * @ORM\OrderBy({"priority" = "DESC"})
      */
     private $memberStatuses;
+
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Invitation")
+     * @ORM\JoinColumn(referencedColumnName="code")
+     * @Assert\NotNull(message="app.registration.invalidInvitation", groups={"Registration"})
+     */
+    protected $invitation;
 
     public function __construct()
     {
@@ -183,5 +192,21 @@ class User extends BaseUser
     public function removeMemberStatus(MemberStatus $memberStatus)
     {
         $this->memberStatuses->removeElement($memberStatus);
+    }
+
+    /**
+     * @return Invitation
+     */
+    public function getInvitation()
+    {
+        return $this->invitation;
+    }
+
+    /**
+     * @param Invitation $invitation
+     */
+    public function setInvitation(Invitation $invitation)
+    {
+        $this->invitation = $invitation;
     }
 }
