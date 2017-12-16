@@ -10,6 +10,7 @@ It is a member directory.
 
 ## Set-Up
 ### Prerequisites
+- Web server and PHP process manager (e.g. niginx and php-fpm)
 - PHP
 - APCu
 - MariaDB (or MySQL)
@@ -20,7 +21,8 @@ Clone and configure the project
 git clone git@github.com:schemar/simplest-weather-app.git
 cd club-list
 composer install
-composer dump-autoload --optimize 
+composer dump-autoload --optimize
+php app/console doctrine:migrations:migrate
 php app/console app:setup
 php app/console server:run
 ```
@@ -33,7 +35,8 @@ Clone and configure the project
 git clone git@github.com:schemar/simplest-weather-app.git
 cd club-list
 composer install
-composer dump-autoload --optimize 
+composer dump-autoload --optimize
+php app/console doctrine:migrations:migrate
 php app/console app:setup
 ```
 - Set all required parameters.
