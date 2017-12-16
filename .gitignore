@@ -3,6 +3,7 @@
 
 # Project
 /web/bundles/
+/web/favicon.ico
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
