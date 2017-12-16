@@ -23,3 +23,5 @@ parameters:
 
     # App specific
     default_locale: en
+    club_name: ~
+    primary_color: 'rgb(119, 119, 119)'

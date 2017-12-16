@@ -1,10 +1,15 @@
 app:
   default:
-    welcome: 'Willkommen!'
     login: 'Einloggen'
     logout: 'Ausloggen'
     register: 'Registrieren'
     admin: 'Admin'
+  welcome:
+    title: '%club_name%'
+    subTitle: 'Mitliederverzeichnis'
+    body: |
+      Willkommen auf dem Mitgliederverzeichnis des %club_name%.
+      Um die Liste der Mitglieder zu sehen, <a href="%logInPath%">loggen Sie sich bitte ein</a>.
   registration:
     invitation: 'Einladungscode'
     invitationEmail:

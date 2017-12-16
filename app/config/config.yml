@@ -36,6 +36,9 @@ twig:
     strict_variables: '%kernel.debug%'
     form:
         resources: ['bootstrap_3_layout.html.twig']
+    globals:
+        club_name: '%club_name%'
+        primary_color: '%primary_color%'
 
 # Doctrine Configuration
 doctrine:

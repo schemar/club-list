@@ -3,8 +3,22 @@
 {% block content %}
     <div class="row">
         <div class="col-xs-12">
-            <h1>{{ 'app.default.welcome'|trans }}</h1>
-            <p>AV Motiv</p>
+            <h1>
+                {{ 'app.welcome.title'|trans({'%club_name%': club_name}) }}
+                <small>
+                    {{ 'app.welcome.subTitle'|trans }}
+                </small>
+            </h1>
+            <p>
+                {{
+                    'app.welcome.body'
+                    |trans({
+                        '%club_name%': club_name,
+                        '%logInPath%': path('fos_user_security_login')
+                    })
+                    |raw
+                }}
+            </p>
         </div>
     </div>
 {% endblock %}
